@@ -11,7 +11,9 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
 
 
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
@@ -38,10 +40,20 @@ public class TestspringsecuApplication extends UsersDevo {
         UsersDevo userpre = new UsersDevo();
         userinfo user1 = new userinfo();
         userpre =  user1.getUser1();
-        System.out.println(userpre.getEmail());
-
+        users.add(userpre);
+      if ( userdevo.getEmail() != userpre.getEmail()) {
+          method();
+          System.out.println("la");
+      }
 
     return principal;
+    }
+
+
+    @GetMapping("/user")
+    public ModelAndView method() {
+        System.out.println("icila");
+        return new ModelAndView("redirect:" + "/");
     }
 
     public static void main(String[] args) {
