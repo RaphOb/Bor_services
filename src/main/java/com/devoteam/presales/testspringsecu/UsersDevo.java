@@ -9,19 +9,20 @@ import javax.persistence.Entity;
 public class UsersDevo {
 
 
-    private String id;
+    private Long ID;
     private String email;
     private String nom;
     private String prenom;
     private String service;
 
 
-    public String getId() {
-        return id;
+
+    public Long getId() {
+        return ID;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(Long id) {
+        this.ID = ID;
     }
     public String getEmail() {
         return email;
@@ -53,6 +54,10 @@ public class UsersDevo {
 
     public void setService(String service) {
         this.service = service;
+    }
+
+    public UsersDevo(String raph, String email, String avv, String oba, int i) {
+
     }
 
 }
