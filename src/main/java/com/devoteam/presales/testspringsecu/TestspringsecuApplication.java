@@ -1,4 +1,5 @@
 package com.devoteam.presales.testspringsecu;
+
 import java.security.Principal;
 import java.util.*;
 
@@ -7,42 +8,36 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
-
-@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
+@SpringBootApplication
 @RestController
-public class TestspringsecuApplication extends UsersDevo {
+public class TestspringsecuApplication {
 
     @Autowired
-    userinfo user1;
+    UsersRepo usersRepo;
 
     @RequestMapping("/user")
-    public Principal user(Model model, Principal principal) throws JSONException {
+    public Principal user(Principal principal) throws JSONException,  Exception {
         OAuth2Authentication authentication = (OAuth2Authentication) principal;
-    Map<String, Object> user = (Map<String, Object>)authentication.getUserAuthentication().getDetails();
-    model.addAttribute("user",user);
-        JSONObject obj = new JSONObject(user);
-        String pageName = obj.getString("name");
-        UsersDevo userdevo = new UsersDevo();
-        List<UsersDevo> users = new ArrayList<>();
-        userdevo.setNom(obj.getString("family_name"));
-        userdevo.setPrenom(obj.getString("given_name"));
-        userdevo.setEmail(obj.getString("email"));
-        users.add(userdevo);
-        System.out.println(userdevo.getEmail());
-        UsersDevo userpre = new UsersDevo();
-        userinfo user1 = new userinfo();
-        userpre =  user1.getUser1();
-        System.out.println(userpre.getEmail());
 
-
-    return principal;
+        return principal;
     }
+
+
 
     public static void main(String[] args) {
 

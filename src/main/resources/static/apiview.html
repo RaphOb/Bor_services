@@ -1,65 +1,279 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <title>test</title>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
 
 </head>
 <body>
 
-<nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-        <img src="img/logo.png" width="50%" height="50%" alt="">
-    </a>
+<header>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="img/logo.png" width="50%" height="50%" alt="">
+        </a>
         <div style="float: right">
             <div class="container authenticated">
                 Logged in as: <span id="user" style="color: #f7485e"></span>
 
                 <div>
-                    <button  onClick="logout()" class="btn btn-primary">Logout</button>
+                    <button onClick="logout()" class="btn btn-primary">Logout</button>
+                </div>
             </div>
         </div>
-        </div>
-</nav>
-<div class="container">
-<div id="filecheck">
-    <form method="post" >
-        <div class="form-group">
-        <label for="query"> Recherche un file</label>
-        <input type="text" id="query" name="query" placeholder="file to search ...">
-        </div>
-        <div id="result"></div>
-    </form>
-</div>
+    </nav>
+</header>
 
-<script type="text/javascript">
-    $.get("/user", function(data) {
-    var domain = "devoteam.com";
-    if (data.userAuthentication.details.hd !== domain) {
-        $.post("/logout", function() {
-            $("#user").html('');
-            $(".unauthenticated").show();
-            $(".authenticated").hide();
+<div class="container">
+    <div id="filecheck">
+        <form method="post">
+            <div class="form-group">
+                <label for="query"> Recherche un file</label>
+                <input type="text" id="query" name="query" placeholder="file to search ...">
+            </div>
+        </form>
+    </div>
+    <section>
+        <h3>Avant Vente</h3>
+        <div class="custom-control custom-radio custom-control-inline" style="margin-left: 20px ">
+            <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline1">Bor 1</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="bor2" name="customRadioInline1" class="custom-control-input">
+            <label class="custom-control-label" for="bor2">Bor 2</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="bor3" name="customRadioInline1" class="custom-control-input">
+            <label class="custom-control-label" for="bor3">Bor 3</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="bor4" name="customRadioInline1" class="custom-control-input">
+            <label class="custom-control-label" for="bor4">Bor 4</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="BIS" name="customRadioInline1" class="custom-control-input">
+            <label class="custom-control-label" for="BIS">Bis</label>
+        </div>
+    </section>
+    <section>
+        <div class="row" style="padding: 10px">
+            <div class="col-md-3">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownClient"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Client
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownClient">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div>
+                    <input class="form-control" type="text" placeholder="Nom de l'affaire">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownSecteur"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Secteur
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownSecteur">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownOffre"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Offre
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownOffre">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownLeader"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Entité Leader
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownLeader">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownContrib"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Entité contrib
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownContrib">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownPart"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Participant obligatoires
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownPart">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group purple-border" style="margin-left: 40px">
+                    <textarea class="form-control" id="email" rows="3" placeholder="Autre participants"></textarea>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section><h3>N° de la Bor</h3>
+        <div class="custom-control custom-radio custom-control-inline" style="margin-left: 20px">
+            <input type="radio" id="AVV1" name="customRadioInline1" class="custom-control-input">
+            <label class="custom-control-label" for="AVV1">DCE</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="AVV2" name="customRadioInline1" class="custom-control-input">
+            <label class="custom-control-label" for="AVV2">SAU</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="AVV3" name="customRadioInline1" class="custom-control-input">
+            <label class="custom-control-label" for="AVV3">PCO</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="AVV4" name="customRadioInline1" class="custom-control-input">
+            <label class="custom-control-label" for="AVV4">AGA</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="AVV5" name="customRadioInline1" class="custom-control-input">
+            <label class="custom-control-label" for="AVV5">LCO</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="AVV6" name="customRadioInline1" class="custom-control-input">
+            <label class="custom-control-label" for="AVV6">SDE</label>
+        </div>
+    </section>
+    <section>
+        <div class="row">
+            <div class="col-md-3">
+                <div>
+                    <input type="text" name="datetimes"/>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="dropdown" style="margin-left: 50px">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="Salle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                        Salle
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="Salle">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputGroupFile01"
+                               aria-describedby="inputGroupFileAddon01">
+                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<footer style="margin-top: -5em">
+    <div class="img">
+        <a href="https://mail.google.com/mail/u/0/#inbox"><img src="img/Gmail.png" width="10%" height="100%"> </a>
+        <h3>Contacter FR BOR</h3>
+    </div>
+    <div class="contact" style="margin-right: 100px">
+    </div>
+</footer>
+<script>
+    $(function () {
+        $('input[name="datetimes"]').daterangepicker({
+            timePicker: true,
+            startDate: moment().startOf('hour'),
+            endDate: moment().startOf('hour').add(32, 'hour'),
+            locale: {
+                format: 'M/DD hh:mm A'
+            }
         });
-        window.location.replace("http://127.0.0.1:8080");
-    }
-       $("#domain").html(data.userAuthentication.details.hd);
+    });
+</script>
+<script type="text/javascript">
+    $.get("/user", function (data) {
+        var domain = "devoteam.com";
+        if (data.userAuthentication.details.hd !== domain) {
+            $.post("/logout", function () {
+                $("#user").html('');
+                $(".unauthenticated").show();
+                $(".authenticated").hide();
+            });
+            window.location.replace("http://127.0.0.1:8080");
+        }
+        $("#domain").html(data.userAuthentication.details.hd);
     });
 
 
-    $.get("/user", function(data) {
+    $.get("/user", function (data) {
         $("#user").html(data.userAuthentication.details.name);
         $(".unauthenticated").hide();
         $(".authenticated").show()
     });
 
-    var logout = function() {
-        $.post("/logout", function() {
+    var logout = function () {
+        $.post("/logout", function () {
             $("#user").html('');
             $(".unauthenticated").show();
             $(".authenticated").hide();
@@ -69,21 +283,16 @@
     };
 
 
-    $( "input" )
-        .keyup(function() {
-            var value = $( this ).val();
-            $( "p" ).text( value );
-            $.get("/index",{"query":value}, function (data){
+    $("input")
+        .keyup(function () {
+            var value = $(this).val();
+            $("p").text(value);
+            $.get("/index", {"query": value}, function (data) {
                 $('#result').html(data);
             });
         })
         .keyup();
 
 </script>
-
-
-</div>
-
-
 </body>
 </html>
