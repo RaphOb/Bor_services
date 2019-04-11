@@ -1,29 +1,32 @@
 package com.devoteam.presales.testspringsecu;
 
-import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-@Data
+
 @Entity
-public class UsersDevo {
+public class User {
 
-
-    private Long ID;
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Integer ID;
     private String email;
     private String nom;
     private String prenom;
-    private String service;
+    private String services;
 
 
-
-    public Long getId() {
+    public Integer getId() {
         return ID;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.ID = ID;
     }
+
     public String getEmail() {
         return email;
     }
@@ -49,15 +52,13 @@ public class UsersDevo {
     }
 
     public String getService() {
-        return service;
+        return services;
     }
 
     public void setService(String service) {
-        this.service = service;
+        this.services = service;
     }
 
-    public UsersDevo(String raph, String email, String avv, String oba, int i) {
 
-    }
 
 }
