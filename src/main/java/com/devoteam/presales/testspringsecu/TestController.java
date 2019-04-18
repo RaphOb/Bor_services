@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
 @Controller
 public class TestController {
     @Autowired
@@ -49,11 +48,12 @@ public class TestController {
                 i++;
             }
         }
-        if (i == 1) {
+        if (i  > 0) {
             return "redirect:/apiview.html";
+        }else {
+            //new SecurityContextLogoutHandler().logout(request, response, auth);
+            return "redirect:/unauthorized.html";
         }
-        new SecurityContextLogoutHandler().logout(request, response, auth);
-        return "redirect:/unauthorized.html";
     }
 
     @GetMapping(path = "/all")
