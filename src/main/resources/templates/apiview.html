@@ -82,9 +82,10 @@
                         Client
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownClient">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <tr th:each="d: ${devolist}">
+                        <a class="dropdown-item" href="#" th:field="*{devolist}" th:value="${d.getEmail()}" th:text="${d.getFirstname()}"></a>
+                        </tr>
+
                     </div>
                 </div>
             </div>
@@ -100,9 +101,9 @@
                         Secteur
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownSecteur">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <tr th:each="d: ${entitylist}">
+                            <a class="dropdown-item" href="#" th:field="*{entitylist}" th:value="${d.getDevoentity()}" th:text="${d.getDevoentity()}"></a>
+                        </tr>
                     </div>
                 </div>
             </div>
@@ -124,23 +125,15 @@
     <section>
         <div class="row">
             <div class="col-md-3">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownLeader"
+                    <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Entité Leader
+                        Entité Leader<span class="caret"></span>
                     </button>
-                    <form action="#" th:action="@{/devolist}" th:object="devo">
-                        <select th:field="*{devolist}">
-                            <option th:each="d : ${devolist}"
-                                    th:value="${d.getId()}"
-                                    th:text="${d.getEmail()}">test</option>
-
-                        </select>
-                    </form>
                     <div class="dropdown-menu" aria-labelledby="dropdownLeader">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <tr th:each="d: ${devolist}">
+                            <a class="dropdown-item" href="#" th:field="*{devolist}" th:value="${d.getEmail()}" th:text="${d.getFirstname()+ ' '+ d.getLastname()}"></a>
+                        </tr>
                     </div>
                 </div>
             </div>
@@ -150,10 +143,10 @@
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Entité contrib
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownContrib">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownLeader">
+                    <tr th:each="d: ${secteurlist}">
+                        <a class="dropdown-item" href="#" th:field="*{secteurlist}" th:value="${d}" th:text="${d}"></a>
+                    </tr>
                     </div>
                 </div>
             </div>
@@ -248,6 +241,11 @@
     </div>
 </footer>
 <script>
+    $(".dropdown-menu a").click(function(){
+        $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+        $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+    });
+
     $(function () {
         $('input[name="datetimes"]').daterangepicker({
             timePicker: true,

@@ -8,15 +8,15 @@ import javax.persistence.Embeddable;
 @Data
 @AllArgsConstructor
 @Embeddable
-public class DevoEntity {
-    private String entity;
+public class Devoentity {
+    private String devoentity;
 
     public String getEntity() {
-        return entity;
+        return devoentity;
     }
 
     public void setEntity(String entity) {
-        this.entity = entity;
+        this.devoentity = devoentity;
     }
-    public DevoEntity(){}
+    public Devoentity(){}
 }

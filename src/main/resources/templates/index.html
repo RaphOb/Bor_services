@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h4>Welcome to Thymeleaf Spring Boot web application</h4>
+
+    <select th:field="*{devolist}">
+        <option th:each="d : ${devolist}"
+                th:value="${d.getId()}"
+                th:text="${d.getEmail()}">test</option>
+
+    </select>
+
+</body>
+</html>

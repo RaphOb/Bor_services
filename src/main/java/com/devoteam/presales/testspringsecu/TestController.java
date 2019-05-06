@@ -49,7 +49,7 @@ public class TestController {
             }
         }
         if (i  > 0) {
-            return "redirect:/apiview.html";
+            return "redirect:/apiview";
         }else {
             //new SecurityContextLogoutHandler().logout(request, response, auth);
             return "redirect:/unauthorized.html";
