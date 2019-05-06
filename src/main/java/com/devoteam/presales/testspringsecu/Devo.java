@@ -1,15 +1,31 @@
 package com.devoteam.presales.testspringsecu;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 import javax.persistence.*;
 
+@Data
+@AllArgsConstructor
 @Entity
 public class Devo {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
     private String Firstname;
     private String Lastname;
     private String Email;
+    private String Secteur;
+//    private String Devoentity;
+
+    public String getSecteur() {
+        return Secteur;
+    }
+
+    public void setSecteur(String secteur) {
+        Secteur = secteur;
+    }
+
 
     public String getFirstname() {
         return Firstname;
@@ -25,14 +41,6 @@ public class Devo {
 
     public void setEmail(String email) {
         Email = email;
-    }
-
-    public DevoEntity getDevoEntity() {
-        return devoEntity;
-    }
-
-    public void setDevoEntity(DevoEntity devoEntity) {
-        this.devoEntity = devoEntity;
     }
 
     public String getLastname() {
@@ -52,6 +60,7 @@ public class Devo {
     }
 
     @Embedded
-    private DevoEntity devoEntity;
+    private Devoentity devoentity;
+    public Devo(){}
 
 }
