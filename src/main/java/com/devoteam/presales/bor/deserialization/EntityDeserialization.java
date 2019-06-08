@@ -1,4 +1,6 @@
-package com.devoteam.presales.bor.models;
+package com.devoteam.presales.bor.deserialization;
+
+import com.devoteam.presales.bor.models.Entity;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -17,8 +19,8 @@ public class EntityDeserialization extends StdDeserializer<Entity> {
     public EntityDeserialization() {
         this(null);
     }
-    private EntityDeserialization(Class<?> vc)
-    {
+
+    private EntityDeserialization(Class<?> vc) {
         super(vc);
     }
 
@@ -29,15 +31,16 @@ public class EntityDeserialization extends StdDeserializer<Entity> {
         SimpleModule module = new SimpleModule();
         module.addDeserializer(Entity.class, new EntityFDeserialization());
         mapper.registerModule(module);
-        TypeReference<List<Entity>> typeReferenceEntity = new TypeReference<>() {};
+        TypeReference<List<Entity>> typeReferenceEntity = new TypeReference<>() {
+        };
         FileInputStream inputStreamEntity = new FileInputStream("C:\\Users\\oraph\\Desktop\\entity.json");
-        List<Entity> entities = mapper.readValue(inputStreamEntity,typeReferenceEntity);
+        List<Entity> entities = mapper.readValue(inputStreamEntity, typeReferenceEntity);
         JsonNode node = jp.getCodec().readTree(jp);
-        String name =  node.get("name").asText();
+        String name = node.get("name").asText();
         String entitype = node.get("entityType").asText();
         String rootEntity = node.get("rootEntity").asText();
         Entity entity = new Entity();
         entity = entity.searchEntity(entities, rootEntity);
-        return new Entity(name, entitype,entity);
+        return new Entity(name, entitype, entity);
     }
 }
