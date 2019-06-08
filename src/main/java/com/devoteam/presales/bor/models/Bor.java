@@ -1,8 +1,29 @@
-package com.devoteam.presales.bor;
-import com.google.api.client.util.DateTime;
+package com.devoteam.presales.bor.models;
 
+import com.google.api.client.util.DateTime;
+import com.google.api.services.calendar.model.Event;
+import com.google.api.services.calendar.model.EventAttendee;
+import com.devoteam.presales.Googleapi;
+
+
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import com.google.api.services.calendar.model.EventDateTime;
+import com.google.api.services.calendar.model.FreeBusyResponse;
+import org.junit.Test;
+import com.google.api.services.calendar.Calendar.Freebusy;
+import com.google.api.services.calendar.model.FreeBusyCalendar;
+import com.google.api.services.calendar.model.FreeBusyRequest;
+import com.google.api.services.calendar.model.FreeBusyRequestItem;
+import com.google.api.services.calendar.model.FreeBusyResponse;
+import com.google.api.services.calendar.model.TimePeriod;
 
 public class Bor {
     private String opportunityId;
@@ -222,12 +243,84 @@ public class Bor {
     public void setOpportunityRating(Integer opportunityRating) {
         this.opportunityRating = opportunityRating;
     }
+
     public LocalDateTime getBorDateTime() {
         return borDateTime;
     }
 
     public void setBorDateTime(LocalDateTime borDateTime) {
         this.borDateTime = borDateTime;
+    }
+
+    @Test
+    public void createBor() throws IOException, GeneralSecurityException, ParseException {
+        User u1 = new User("o.raphou@gmail.com", "john", "smith");
+        User u2 = new User("raphael.obadia@devoteam.com", "charles", "Mcgowan");
+        User u3 = new User("obadia_r@etna-alternance.net", "david", "j.mock");
+        Entity e1 = new Entity("BFA", "secteur");
+        Entity e2 = new Entity("IT", "secteur");
+        Entity e3 = new Entity("security", "offre");
+        Entity entity = new Entity();
+        List<User> l1 = new ArrayList<>() {{
+            add(u1);
+            add(u2);
+        }};
+        List<User> l2 = new ArrayList<>() {{
+            add(u3);
+        }};
+        List<Audience> al = new ArrayList<>();
+        Audience a = new Audience();
+        a.setEntity(e1);
+        a.setStageBor(1);
+        a.setMandatory(l1);
+        // a.setMandatory(l2);
+        a.setOptional(l2);
+        al.add(a);
+
+        List<User> mandatory = a.getMandatoryFromEntity(e1, 1, al);
+        List<User> optionnal = a.getOptionnalFromEntity(e1, 1, al);
+        System.out.println(mandatory);
+        List<String> emailM = mandatory.stream().map(User::getEmail).collect(Collectors.toList());
+        List<String> emailO = optionnal.stream().map(User::getEmail).collect(Collectors.toList());
+
+        EventAttendee[] attendees = new EventAttendee[emailM.size() + emailO.size()];
+        for (int i = 0; i < emailM.size(); i++) {
+            attendees[i] = new EventAttendee().setEmail(emailM.get(i));
+        }
+        for (int i = 0; i < emailO.size(); i++) {
+            attendees[i + emailM.size()] = new EventAttendee().setEmail(emailO.get(i));
+        }
+
+        Event event = new Event();
+        event.setAttendees(Arrays.asList(attendees));
+        event.setSummary("new Event");
+
+        Googleapi service = new Googleapi("c:/temp/credentials.json");
+        List<Event> eventDispo = service.checkIdevent("Creneau");
+        event.setSummary("Bor Booked");
+        String id = eventDispo.get(0).getId();
+        int index = 0;
+        for (Event e : eventDispo) {
+            if (isAvailable(emailM, eventDispo.get(index).getStart()) < 0.49) {
+                index++;
+            } else {
+                service.updEvent("primary", eventDispo.get(index).getId(), event);
+
+            }
+        }
+    }
+
+    private float isAvailable(List<String> email, EventDateTime start) throws ParseException, GeneralSecurityException, IOException {
+        Googleapi service = new Googleapi("c:/temp/credentials.json");
+        Map<String, List<TimePeriod>> res = service.getBusy(email, start);
+        float i = 0;
+        float l = email.size();
+        for (List<TimePeriod> res1 : res.values()) {
+            if (res1.isEmpty()) {
+                i++;
+            }
+        }
+        return i / l;
     }
 }
 //todo : test creation 3 users
