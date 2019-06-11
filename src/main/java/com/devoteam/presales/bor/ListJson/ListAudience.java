@@ -12,6 +12,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+/**
+ * Global listAudience
+ */
 public class ListAudience {
     public static List<Audience> audiences;
     public ListAudience() throws FileNotFoundException {

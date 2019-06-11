@@ -5,14 +5,23 @@ import com.devoteam.presales.bor.ListJson.ListEntities;
 import com.devoteam.presales.bor.ListJson.ListUser;
 
 import java.io.FileNotFoundException;
+import java.util.List;
 
 public class testJson {
     public static void main(String[] args) throws FileNotFoundException {
         ListEntities entities = new ListEntities();
         ListUser users = new ListUser();
         ListAudience audiences = new ListAudience();
-        System.out.println(ListEntities.entities);
-        System.out.println(ListUser.users);
-        System.out.println(ListAudience.audiences);
+
+        for (Entity x: ListEntities.entities) {
+            System.out.println(x.getName());
+        }
+        for (User x: ListUser.users) {
+            System.out.println(x.getFirstname());
+        }
+        for (Audience x: ListAudience.audiences) {
+            System.out.println(x.getStageBor());
+        }
+
     }
 }

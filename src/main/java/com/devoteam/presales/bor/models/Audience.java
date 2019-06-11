@@ -65,7 +65,14 @@ public class Audience {
 
     }
 
-    public  List<User> getMandatoryFromEntity(Entity entity, Integer bor, List<Audience> data) {
+    /**
+     *
+     * @param entity
+     * @param bor
+     * @param data
+     * @return list Mandatory User
+     */
+    public static  List<User> getMandatoryFromEntity(Entity entity, Integer bor, List<Audience> data) {
         List<User> mandatory = new ArrayList<>();
         for (Audience aud : data) {
             if (aud.entity.getName().equals(entity.getName()) && aud.getStageBor().equals(bor))
@@ -74,7 +81,15 @@ public class Audience {
         return mandatory;
     }
 
-    public List<User> getOptionnalFromEntity(Entity entity, Integer bor, List<Audience> data) {
+    /**
+     *
+     *
+     * @param entity
+     * @param bor
+     * @param data
+     * @return list User Optional
+     */
+    public static List<User> getOptionalFromEntity(Entity entity, Integer bor, List<Audience> data) {
         List<User> optionnal = new ArrayList<>();
         for (Audience aud : data) {
             if (aud.entity.getName().equals(entity.getName()) && aud.getStageBor().equals(bor)) {

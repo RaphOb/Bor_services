@@ -1,5 +1,6 @@
 package com.devoteam.presales.bor.deserialization;
 
+import com.devoteam.presales.bor.ListJson.ListUser;
 import com.devoteam.presales.bor.models.Audience;
 import com.devoteam.presales.bor.models.Entity;
 import com.devoteam.presales.bor.ListJson.ListEntities;
@@ -39,10 +40,9 @@ public class AudienceDeserialization extends StdDeserializer<Audience> {
         List<User> optional = new ArrayList<>();
 
         for (JsonNode x : listEmailMandatory) {
-            User user = new User();
-            user.setEmail(x.asText());
-            mandatory.add(user);
 
+          User  user = User.getUserFromEmail(ListUser.users,x.asText());
+            mandatory.add(user);
         }
         for (JsonNode x : listEmailOptional) {
             User user1 = new User();
