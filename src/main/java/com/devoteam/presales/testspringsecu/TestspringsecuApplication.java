@@ -1,53 +1,61 @@
 package com.devoteam.presales.testspringsecu;
-import java.security.Principal;
-import java.util.*;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.security.Principal;
+import java.util.List;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
 
-@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
+@SpringBootApplication
 @RestController
-public class TestspringsecuApplication extends UsersDevo {
+public class TestspringsecuApplication {
 
     @Autowired
-    userinfo user1;
+    UsersRepo usersRepo;
 
     @RequestMapping("/user")
-    public Principal user(Model model, Principal principal) throws JSONException {
+    public Principal user(Principal principal) throws JSONException,  Exception {
         OAuth2Authentication authentication = (OAuth2Authentication) principal;
-    Map<String, Object> user = (Map<String, Object>)authentication.getUserAuthentication().getDetails();
-    model.addAttribute("user",user);
-        JSONObject obj = new JSONObject(user);
-        String pageName = obj.getString("name");
-        UsersDevo userdevo = new UsersDevo();
-        List<UsersDevo> users = new ArrayList<>();
-        userdevo.setNom(obj.getString("family_name"));
-        userdevo.setPrenom(obj.getString("given_name"));
-        userdevo.setEmail(obj.getString("email"));
-        users.add(userdevo);
-        System.out.println(userdevo.getEmail());
-        UsersDevo userpre = new UsersDevo();
-        userinfo user1 = new userinfo();
-        userpre =  user1.getUser1();
-        System.out.println(userpre.getEmail());
 
-
-    return principal;
+        return principal;
     }
+
+
 
     public static void main(String[] args) {
 
         SpringApplication.run(TestspringsecuApplication.class, args);
 
+    }
+
+    @Bean
+    CommandLineRunner runner (DevoService devoservice) {
+        return args -> {
+            // read json and write to db
+            ObjectMapper mapper = new ObjectMapper();
+            TypeReference<List<Devo>> typeReference = new TypeReference<List<Devo>>(){};
+            FileInputStream  inputStream = new FileInputStream("C:\\Users\\oraph\\Desktop\\users.json");
+            try {
+                List<Devo> devos = mapper.readValue(inputStream,typeReference);
+                devoservice.save(devos);
+                System.out.println("Users Saved!");
+            } catch (IOException e){
+                System.out.println("Unable to save users: " + e.getMessage());
+            }
+        };
     }
 
 }

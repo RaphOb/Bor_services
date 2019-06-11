@@ -1,25 +1,32 @@
 package com.devoteam.presales.testspringsecu;
 
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 
-public class UsersDevo {
+@Entity
+public class User {
 
-
-    private String id;
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Integer ID;
     private String email;
     private String nom;
     private String prenom;
-    private String service;
+    private String services;
 
 
-    public String getId() {
-        return id;
+    public Integer getId() {
+        return ID;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(Integer id) {
+        this.ID = ID;
     }
+
     public String getEmail() {
         return email;
     }
@@ -45,11 +52,13 @@ public class UsersDevo {
     }
 
     public String getService() {
-        return service;
+        return services;
     }
 
     public void setService(String service) {
-        this.service = service;
+        this.services = service;
     }
+
+
 
 }
