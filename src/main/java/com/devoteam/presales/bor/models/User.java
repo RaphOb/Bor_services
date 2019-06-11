@@ -71,10 +71,10 @@ public class User {
                 .collect(Collectors.toList());
     }
 
-    public User getUserFromEmail(List<User> data, String email)
+    public static User getUserFromEmail(List<User> data, String email)
     {
         return data.stream()
-                .filter(user ->user.getEmail().equals(email))
+                .filter(res ->res.getEmail().equals(email))
                 .findAny().orElse(null);
     }
 

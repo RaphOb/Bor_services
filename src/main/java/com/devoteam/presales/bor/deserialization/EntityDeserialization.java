@@ -14,6 +14,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Second Deserializatoin for Entities, to retrieve rootEntity
+ */
 public class EntityDeserialization extends StdDeserializer<Entity> {
 
     public EntityDeserialization() {
@@ -23,6 +26,7 @@ public class EntityDeserialization extends StdDeserializer<Entity> {
     private EntityDeserialization(Class<?> vc) {
         super(vc);
     }
+
 
     public Entity deserialize(JsonParser jp, DeserializationContext ctxt)
             throws IOException {

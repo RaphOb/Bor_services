@@ -8,6 +8,9 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
 import java.io.IOException;
 
+/**
+ * First Deserialization to build a list Entities
+ */
 public class EntityFDeserialization extends StdDeserializer<Entity> {
 
     public EntityFDeserialization() {

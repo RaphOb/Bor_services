@@ -29,8 +29,7 @@ public class UserDeserialization extends StdDeserializer<User> {
         String email = node.get("email").asText();
         String name = node.get("entity").asText();
         Entity entity = new Entity();
-        ListEntities l = new ListEntities();
         entity = entity.searchEntity(ListEntities.entities, name);
-        return new User(firstname, lastname, email, entity);
+        return new User(email, lastname, firstname, entity);
     }
 }

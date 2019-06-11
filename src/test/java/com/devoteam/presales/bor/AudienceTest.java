@@ -60,7 +60,7 @@ public class AudienceTest {
         Integer bor =  1;
         List<User> uL;
         Audience audience = new Audience();
-        uL = audience.getOptionnalFromEntity(ent, bor, audiences);
+        uL = audience.getOptionalFromEntity(ent, bor, audiences);
         System.out.print(uL.get(0));
         assertThat(uL.get(0).equals(audiences.get(0).getMandatory().get(0)));
     }

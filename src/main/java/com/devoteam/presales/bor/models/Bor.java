@@ -1,5 +1,6 @@
 package com.devoteam.presales.bor.models;
 
+import com.devoteam.presales.bor.ListJson.ListAudience;
 import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventAttendee;
@@ -254,32 +255,9 @@ public class Bor {
 
     @Test
     public void createBor() throws IOException, GeneralSecurityException, ParseException {
-        User u1 = new User("o.raphou@gmail.com", "john", "smith");
-        User u2 = new User("raphael.obadia@devoteam.com", "charles", "Mcgowan");
-        User u3 = new User("obadia_r@etna-alternance.net", "david", "j.mock");
-        Entity e1 = new Entity("BFA", "secteur");
-        Entity e2 = new Entity("IT", "secteur");
-        Entity e3 = new Entity("security", "offre");
-        Entity entity = new Entity();
-        List<User> l1 = new ArrayList<>() {{
-            add(u1);
-            add(u2);
-        }};
-        List<User> l2 = new ArrayList<>() {{
-            add(u3);
-        }};
-        List<Audience> al = new ArrayList<>();
-        Audience a = new Audience();
-        a.setEntity(e1);
-        a.setStageBor(1);
-        a.setMandatory(l1);
-        // a.setMandatory(l2);
-        a.setOptional(l2);
-        al.add(a);
 
-        List<User> mandatory = a.getMandatoryFromEntity(e1, 1, al);
-        List<User> optionnal = a.getOptionnalFromEntity(e1, 1, al);
-        System.out.println(mandatory);
+        List<User> mandatory = Audience.getMandatoryFromEntity(new Entity(), 1, ListAudience.audiences);
+        List<User> optionnal = Audience.getOptionalFromEntity(new Entity(), 1, ListAudience.audiences);
         List<String> emailM = mandatory.stream().map(User::getEmail).collect(Collectors.toList());
         List<String> emailO = optionnal.stream().map(User::getEmail).collect(Collectors.toList());
 
@@ -298,7 +276,6 @@ public class Bor {
         Googleapi service = new Googleapi("c:/temp/credentials.json");
         List<Event> eventDispo = service.checkIdevent("Creneau");
         event.setSummary("Bor Booked");
-        String id = eventDispo.get(0).getId();
         int index = 0;
         for (Event e : eventDispo) {
             if (isAvailable(emailM, eventDispo.get(index).getStart()) < 0.49) {

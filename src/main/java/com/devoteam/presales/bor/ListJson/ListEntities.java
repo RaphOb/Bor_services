@@ -12,6 +12,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Global List Entities
+ */
 public class ListEntities {
     public static List<Entity> entities;
     public ListEntities() throws FileNotFoundException {
