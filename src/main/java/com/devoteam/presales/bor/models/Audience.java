@@ -20,6 +20,7 @@ public class Audience {
     public void setEntity(Entity entity) {
         this.entity = entity;
     }
+
     public Integer getStageBor() {
         return stageBor;
     }
@@ -36,7 +37,7 @@ public class Audience {
         this.mandatory = mandatory;
     }
 
-    public  List<User> getOptional() {
+    public List<User> getOptional() {
         return optional;
     }
 
@@ -49,15 +50,15 @@ public class Audience {
         return user;
     }
 
-    public Audience(){}
-    public Audience(Entity entity, Integer stageBor)
-    {
+    public Audience() {
+    }
+
+    public Audience(Entity entity, Integer stageBor) {
         this.entity = entity;
         this.stageBor = stageBor;
     }
 
-    public Audience(Entity entity, Integer stageBor, List<User> mandatory, List<User> optional)
-    {
+    public Audience(Entity entity, Integer stageBor, List<User> mandatory, List<User> optional) {
         this.entity = entity;
         this.stageBor = stageBor;
         this.mandatory = mandatory;
@@ -66,13 +67,12 @@ public class Audience {
     }
 
     /**
-     *
      * @param entity
      * @param bor
      * @param data
      * @return list Mandatory User
      */
-    public static  List<User> getMandatoryFromEntity(Entity entity, Integer bor, List<Audience> data) {
+    public static List<User> getMandatoryFromEntity(Entity entity, Integer bor, List<Audience> data) {
         List<User> mandatory = new ArrayList<>();
         for (Audience aud : data) {
             if (aud.entity.getName().equals(entity.getName()) && aud.getStageBor().equals(bor))
@@ -82,8 +82,6 @@ public class Audience {
     }
 
     /**
-     *
-     *
      * @param entity
      * @param bor
      * @param data

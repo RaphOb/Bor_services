@@ -20,7 +20,7 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.devoteam.presales"})
 @RestController
 @EnableScheduling
 public class TestspringsecuApplication {

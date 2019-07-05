@@ -17,6 +17,7 @@ import java.util.List;
  */
 public class ListEntities {
     public static List<Entity> entities;
+
     public ListEntities() throws FileNotFoundException {
         com.fasterxml.jackson.databind.ObjectMapper mapper = new ObjectMapper();
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
@@ -30,13 +31,12 @@ public class ListEntities {
         FileInputStream inputStreamEntity = new FileInputStream("C:\\Users\\oraph\\Desktop\\entity.json");
 
         try {
-           entities = mapper.readValue(inputStreamEntity, typeReferenceEntity);
+            entities = mapper.readValue(inputStreamEntity, typeReferenceEntity);
             System.out.println("Entities saved!");
         } catch (IOException e) {
             System.out.println("Unable to save Entities: " + e.getMessage());
         }
     }
-
 
 
 }

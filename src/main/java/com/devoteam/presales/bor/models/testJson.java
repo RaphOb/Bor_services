@@ -12,16 +12,16 @@ public class testJson {
         ListEntities entities = new ListEntities();
         ListUser users = new ListUser();
         ListAudience audiences = new ListAudience();
-
-        for (Entity x: ListEntities.entities) {
-            System.out.println(x.getName());
-        }
-        for (User x: ListUser.users) {
-            System.out.println(x.getFirstname());
-        }
-        for (Audience x: ListAudience.audiences) {
-            System.out.println(x.getStageBor());
-        }
+//
+//        for (Entity x: ListEntities.entities) {
+//            System.out.println(x.getName());
+//        }
+//        for (User x: ListUser.users) {
+//            System.out.println(x.getFirstname());
+//        }
+//        for (Audience x: ListAudience.audiences) {
+//            System.out.println(x.getStageBor());
+//        }
 
     }
 }

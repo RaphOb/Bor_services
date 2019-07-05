@@ -310,11 +310,11 @@ public class Bor {
         return i / l;
     }
 
-    @Scheduled(cron ="0 0 12 * * *" )
+    @Scheduled(cron = "0 0 12 * * *")
     public void scheduledWriteJsonBor() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         Date dNow = new Date();
         SimpleDateFormat ft = new SimpleDateFormat("dMy");
-        objectMapper.writeValue(new FileWriter("C:\\Users\\oraph\\Desktop\\bor_"+ft.format(dNow) +".json"), ListBors.listBors);
+        objectMapper.writeValue(new FileWriter("C:\\Users\\oraph\\Desktop\\bor_" + ft.format(dNow) + ".json"), ListBors.listBors);
     }
 }
