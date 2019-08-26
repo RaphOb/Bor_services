@@ -35,6 +35,7 @@ public class TestspringsecuApplication {
         return principal;
     }
 
+
     public static void main(String[] args) {
 
         SpringApplication.run(TestspringsecuApplication.class, args);

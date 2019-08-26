@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@JsonDeserialize(using = UserDeserialization.class)
+
 public class User {
     private String email;
     private String firstname;

@@ -2,7 +2,9 @@ package com.devoteam.presales.bor.models;
 
 import com.devoteam.presales.bor.ListJson.ListAudience;
 import com.devoteam.presales.bor.ListJson.ListBors;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventAttendee;
@@ -31,10 +33,12 @@ import com.google.api.services.calendar.model.FreeBusyResponse;
 import com.google.api.services.calendar.model.TimePeriod;
 import org.springframework.scheduling.annotation.Scheduled;
 
+@JsonAutoDetect
 public class Bor {
     private String opportunityId;
     private String accountName;
     private String stage;
+
     private User owner;
     private User salesLeader;
     private User technicalLeader;

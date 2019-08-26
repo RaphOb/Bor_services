@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Audience {
-    @JsonDeserialize(using = AudienceDeserialization.class)
+
     public Entity entity;
     private Integer stageBor;
     private List<User> mandatory;

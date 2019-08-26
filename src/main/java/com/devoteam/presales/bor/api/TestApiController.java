@@ -4,6 +4,7 @@ import com.devoteam.presales.bor.ListJson.ListAudience;
 import com.devoteam.presales.bor.ListJson.ListEntities;
 import com.devoteam.presales.bor.ListJson.ListUser;
 import com.devoteam.presales.bor.models.Audience;
+import com.devoteam.presales.bor.models.Bor;
 import com.devoteam.presales.bor.models.Entity;
 import com.devoteam.presales.bor.models.User;
 import org.springframework.web.bind.annotation.*;
@@ -30,5 +31,12 @@ public class TestApiController {
     public List<Audience> audienceList() {
         return new ArrayList<>(ListAudience.audiences);
     }
+
+    @PostMapping("/bors")
+    public Bor createBor(@RequestBody Bor bor) {
+        System.out.println(bor.getOwner().getFirstname());
+        return bor;
+    }
+
 }
 //todo creer controler pour call  createbor, regarde material
