@@ -1,12 +1,18 @@
 package com.devoteam.presales.bor.models;
 
 import com.devoteam.presales.bor.ListJson.ListAudience;
+import com.devoteam.presales.bor.ListJson.ListBors;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventAttendee;
 import com.devoteam.presales.Googleapi;
 
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.text.DateFormat;
@@ -25,11 +31,14 @@ import com.google.api.services.calendar.model.FreeBusyRequest;
 import com.google.api.services.calendar.model.FreeBusyRequestItem;
 import com.google.api.services.calendar.model.FreeBusyResponse;
 import com.google.api.services.calendar.model.TimePeriod;
+import org.springframework.scheduling.annotation.Scheduled;
 
+@JsonAutoDetect
 public class Bor {
     private String opportunityId;
     private String accountName;
     private String stage;
+
     private User owner;
     private User salesLeader;
     private User technicalLeader;
@@ -255,6 +264,10 @@ public class Bor {
 
     @Test
     public void createBor() throws IOException, GeneralSecurityException, ParseException {
+        Bor bor = new Bor();
+        bor.setStage("2");
+        bor.setAccountName("un account name");
+
 
         List<User> mandatory = Audience.getMandatoryFromEntity(new Entity(), 1, ListAudience.audiences);
         List<User> optionnal = Audience.getOptionalFromEntity(new Entity(), 1, ListAudience.audiences);
@@ -281,10 +294,11 @@ public class Bor {
             if (isAvailable(emailM, eventDispo.get(index).getStart()) < 0.49) {
                 index++;
             } else {
-                service.updEvent("primary", eventDispo.get(index).getId(), event);
+//                service.updEvent("primary", eventDispo.get(index).getId(), event);
 
             }
         }
+        ListBors.listBors.add(bor);
     }
 
     private float isAvailable(List<String> email, EventDateTime start) throws ParseException, GeneralSecurityException, IOException {
@@ -299,6 +313,12 @@ public class Bor {
         }
         return i / l;
     }
+
+    @Scheduled(cron = "0 0 12 * * *")
+    public void scheduledWriteJsonBor() throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Date dNow = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("dMy");
+        objectMapper.writeValue(new FileWriter("C:\\Users\\oraph\\Desktop\\bor_" + ft.format(dNow) + ".json"), ListBors.listBors);
+    }
 }
-//todo : test creation 3 users
-// todo : creation des test pour recuperer les champs et les users

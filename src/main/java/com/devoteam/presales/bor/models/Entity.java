@@ -1,12 +1,9 @@
 package com.devoteam.presales.bor.models;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-//@JsonDeserialize(using = EntityFDeserialization.class)
 public class Entity {
     private String name;
     private String entityType;

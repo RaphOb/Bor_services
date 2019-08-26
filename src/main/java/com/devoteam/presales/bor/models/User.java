@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@JsonDeserialize(using = UserDeserialization.class)
+
 public class User {
     private String email;
     private String firstname;
@@ -46,38 +46,34 @@ public class User {
         lastname = lastname;
     }
 
-    public User(){
+    public User() {
 
     }
 
-    public User(String email, String lastname, String firstname)
-    {
+    public User(String email, String lastname, String firstname) {
         this.email = email;
         this.lastname = lastname;
         this.firstname = firstname;
     }
-    public User(String email, String lastname, String firstname, Entity entity)
-    {
+
+    public User(String email, String lastname, String firstname, Entity entity) {
         this.email = email;
         this.lastname = lastname;
         this.firstname = firstname;
         this.entity = entity;
     }
 
-    public List<User> getUserfromEntity(Entity entity, List<User> data)
-    {
+    public List<User> getUserfromEntity(Entity entity, List<User> data) {
         return data.stream()
-                .filter(user->user.getEntity().getName().equals(entity.getName()))
+                .filter(user -> user.getEntity().getName().equals(entity.getName()))
                 .collect(Collectors.toList());
     }
 
-    public static User getUserFromEmail(List<User> data, String email)
-    {
+    public static User getUserFromEmail(List<User> data, String email) {
         return data.stream()
-                .filter(res ->res.getEmail().equals(email))
+                .filter(res -> res.getEmail().equals(email))
                 .findAny().orElse(null);
     }
-
 
 
 }

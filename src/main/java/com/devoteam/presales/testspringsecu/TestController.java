@@ -3,15 +3,12 @@ package com.devoteam.presales.testspringsecu;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 public class TestController {
     @Autowired
     UsersRepo usersRepo;
@@ -39,7 +36,6 @@ public class TestController {
         userdevo.setPrenom(obj.getString("given_name"));
         userdevo.setEmail(obj.getString("email"));
         users.add(userdevo);
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Iterable<User> iterator = usersRepo.findAll();
         int i = 0;
         for (User u : iterator) {
@@ -56,10 +52,18 @@ public class TestController {
         }
     }
 
-    @GetMapping(path = "/all")
+    @CrossOrigin(origins = "http://localhost:4200")
+    @RequestMapping(path = "/all")
     public @ResponseBody
     Iterable<User> getAllUsers() {
         return usersRepo.findAll();
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @RequestMapping(path = "/aouai")
+    public @ResponseBody
+    String getString() {
+        return "aouai";
     }
 
 }

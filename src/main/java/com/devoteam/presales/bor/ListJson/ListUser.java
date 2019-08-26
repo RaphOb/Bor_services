@@ -28,7 +28,7 @@ public class ListUser {
         };
         FileInputStream inputStreamUser = new FileInputStream("C:\\Users\\oraph\\Desktop\\user.json");
         try {
-           users = mapper.readValue(inputStreamUser, typeReferenceUser);
+            users = mapper.readValue(inputStreamUser, typeReferenceUser);
             System.out.println("Users Saved!");
         } catch (IOException e) {
             System.out.println("Unable to save users: " + e.getMessage());
